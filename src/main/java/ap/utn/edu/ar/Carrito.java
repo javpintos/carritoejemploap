@@ -1,41 +1,30 @@
 package ap.utn.edu.ar;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Carrito {
 	
 	private Persona persona;
-	private Producto producto1;
-	private Producto producto2;
-	private Producto producto3;
+	private Collection<ItemCarrito> items;
 	private LocalDate fechaCompra;
 	
 	public Carrito(Persona p) {
 		this.persona = p;
+		this.items = new ArrayList<ItemCarrito>();
 	}
 
-	public Producto getProducto1() {
-		return producto1;
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setProducto1(Producto producto1) {
-		this.producto1 = producto1;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
 	}
 
-	public Producto getProducto2() {
-		return producto2;
-	}
-
-	public void setProducto2(Producto producto2) {
-		this.producto2 = producto2;
-	}
-
-	public Producto getProducto3() {
-		return producto3;
-	}
-
-	public void setProducto3(Producto producto3) {
-		this.producto3 = producto3;
+	public void agregarItem (ItemCarrito ic){
+		this.items.add(ic);
 	}
 
 	public LocalDate getFechaCompra() {
@@ -46,40 +35,18 @@ public class Carrito {
 		this.fechaCompra = fechaCompra;
 	}
 
-	public Persona getPersona() {
-		return persona;
-	}
-	
-	public double costoFinal() {
+	public double costoFinal() throws NoHayStockException{
 		double sumaProd = 0;
-		
-		if(producto1 != null) {
-			sumaProd += producto1.getPrecio();
-		}
-		if(producto2 != null) {
-			sumaProd += producto2.getPrecio();
-		}
-		if(producto3 != null) {
-			sumaProd += producto3.getPrecio();
+
+		for (ItemCarrito itemcarrito:this.items) {
+			sumaProd += itemcarrito.precioLinea();
 		}
 		
 		return sumaProd ;
 	}
 	
 	public int cantProds() {
-		int sumaProd = 0;
-		
-		if(producto1 != null) {
-			sumaProd += 1;
-		}
-		if(producto2 != null) {
-			sumaProd += 1;
-		}
-		if(producto3 != null) {
-			sumaProd += 1;
-		}
-		
-		return sumaProd;
+		return this.items.size();
 	}
 	
 	

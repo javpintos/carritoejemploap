@@ -9,6 +9,7 @@ public class Producto {
 	private LocalDate fechaAlta;
 	private Integer pesoKg;
 	private Double precio;
+	private int stock;
 	
 	public static final Double minPrecio = 100.0;
 	
@@ -16,6 +17,11 @@ public class Producto {
 		this.nombre = nombre;
 		this.fechaAlta = LocalDate.now();
 		this.precio = minPrecio;
+		this.stock = 0;
+	}
+
+	public boolean hayStock(){
+		return this.stock > 0;
 	}
 
 	public String getNombre() {
@@ -58,4 +64,11 @@ public class Producto {
 		this.precio = precio;
 	}
 
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
+	}
 }
